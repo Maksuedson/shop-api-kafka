@@ -2,7 +2,6 @@ package br.com.shop.model;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import br.com.shop.dto.ShopDTO;
 import jakarta.persistence.CascadeType;
@@ -24,7 +23,7 @@ public class Shop {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String Identifier;
+	private String identifier;
 	private String status;
 	
 	@Column(name = "date_shop")
@@ -43,8 +42,8 @@ public class Shop {
 		shop.setItems(shopDTO
 				.getItems()
 				.stream()
-				.map(i -> ShopItem.convert(i))
-				.collect(Collectors.toList())
+				.map(ShopItem::convert)
+				.toList()
 				);
 		
 		return shop;

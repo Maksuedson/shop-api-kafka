@@ -3,19 +3,16 @@ package br.com.shop.dto;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import br.com.shop.model.Shop;
-import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
 public class ShopDTO {
 
-	private String Identifier;
+	private String identifier;
 	private String status;
 	private LocalDate dateShop;
 	private List<ShopItemDTO> items = new ArrayList<>();;
@@ -27,8 +24,8 @@ public class ShopDTO {
 		shopDTO.setStatus(shop.getStatus());
 		shopDTO.setItems(shop.getItems()
 				.stream()
-				.map(i -> ShopItemDTO.convert(i))
-				.collect(Collectors.toList()));
+				.map(ShopItemDTO::convert)
+				.toList());
 		
 		return shopDTO;
 	}

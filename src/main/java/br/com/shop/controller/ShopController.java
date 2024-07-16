@@ -2,7 +2,6 @@ package br.com.shop.controller;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.apache.kafka.common.Uuid;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,8 +28,8 @@ public class ShopController {
 		return shopRepository
 				.findAll()
 				.stream()
-				.map(shop -> ShopDTO.convert(shop))
-				.collect(Collectors.toList());
+				.map(ShopDTO::convert)
+				.toList();
 	}
 	
 	@PostMapping
